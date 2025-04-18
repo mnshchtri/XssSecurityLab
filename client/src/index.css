@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-gray-50 text-gray-800;
+  }
+  
+  .vulnerability-indicator {
+    position: relative;
+  }
+  
+  .vulnerability-indicator::after {
+    content: "⚠️";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 16px;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .security-console {
+    font-family: monospace;
+    height: 200px;
+    overflow-y: auto;
+  }
+  
+  .security-console p {
+    margin: 0;
+    padding: 3px 0;
+    border-bottom: 1px solid #2d3748;
+  }
+}
