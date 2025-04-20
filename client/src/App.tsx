@@ -11,6 +11,7 @@ import SearchPage from "@/pages/SearchPage";
 import ProductsPage from "@/pages/ProductsPage";
 import CategoriesPage from "@/pages/CategoriesPage";
 import AboutPage from "@/pages/AboutPage";
+import ProfilePage from "@/pages/ProfilePage";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ShoppingCart from "@/components/ShoppingCart";
@@ -32,7 +33,7 @@ function Router() {
       <Route path="/products" component={ProductsPage} />
       <Route path="/categories" component={CategoriesPage} />
       <Route path="/about" component={AboutPage} />
-      <ProtectedRoute path="/profile" component={() => <div>Profile Page</div>} />
+      <ProtectedRoute path="/profile" component={ProfilePage} />
       <ProtectedRoute path="/orders" component={() => <div>Orders Page</div>} />
       <Route component={NotFound} />
     </Switch>

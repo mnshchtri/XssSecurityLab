@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { AlertTriangle, Shield, Terminal, FileCode, BookOpen } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { TeamMembers } from "@/components/TeamMembers";
 
 export default function AboutPage() {
   return (
@@ -91,7 +92,7 @@ export default function AboutPage() {
             </Card>
           </div>
           
-          <Card>
+          <Card className="mb-8">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-primary" />
@@ -112,6 +113,8 @@ export default function AboutPage() {
               </div>
             </CardContent>
           </Card>
+
+          <TeamMembers />
         </div>
       </div>
     </>
