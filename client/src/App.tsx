@@ -50,10 +50,12 @@ function App() {
             <CartProvider>
               <div className="flex flex-col min-h-screen">
                 <Header />
-                <main className="flex-grow">
-                  <Router />
+                <main className="flex-grow container mx-auto px-4 py-8">
+                  <div className="max-w-7xl mx-auto">
+                    <Router />
+                  </div>
                 </main>
-                <Footer />
+                <Footer className="mt-auto" />
                 <ShoppingCart />
                 <SecurityConsole />
                 <LoginModal isOpen={loginModalOpen} onClose={() => setLoginModalOpen(false)} />

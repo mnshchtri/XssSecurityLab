@@ -5,6 +5,7 @@ import { setupAuth } from "./auth";
 import { insertReviewSchema, insertCartItemSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  const server = createServer(app);
   // Set up auth routes
   setupAuth(app);
 
@@ -177,7 +178,5 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.status(204).send();
   });
 
-  const httpServer = createServer(app);
-
-  return httpServer;
+  return server;
 }

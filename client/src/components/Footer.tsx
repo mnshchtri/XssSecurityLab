@@ -3,11 +3,15 @@ import { Terminal, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSecurity } from "@/hooks/use-security";
 
-export default function Footer() {
+interface FooterProps {
+  className?: string;
+}
+
+export default function Footer({ className = "" }: FooterProps) {
   const { toggleConsole } = useSecurity();
 
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className={`bg-gray-800 text-white py-8 ${className}`}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>

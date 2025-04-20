@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, decimal } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -23,22 +23,23 @@ export const products = pgTable("products", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   description: text("description").notNull(),
-  price: integer("price").notNull(),
+  price: text("price").notNull(),
   imageUrl: text("image_url").notNull(),
   category: text("category").notNull(),
-  rating: integer("rating").default(0),
-  reviewCount: integer("review_count").default(0),
-  createdAt: timestamp("created_at").defaultNow()
+  stock: integer("stock").notNull().default(0),
+  rating: decimal("rating", { precision: 3, scale: 2 }).notNull().default(0),
+  reviewCount: integer("review_count").notNull().default(0),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
-export const insertProductSchema = createInsertSchema(products).pick({
-  name: true,
-  description: true,
-  price: true,
-  imageUrl: true,
-  category: true,
-  rating: true,
-  reviewCount: true,
+export const insertProductSchema = z.object({
+  name: z.string().min(1),
+  description: z.string().min(1),
+  price: z.number().positive(),
+  imageUrl: z.string().url(),
+  category: z.string().min(1),
+  stock: z.number().int().nonnegative(),
 });
 
 // Review Schema
@@ -84,6 +85,7 @@ export type User = typeof users.$inferSelect;
 
 export type InsertProduct = z.infer<typeof insertProductSchema>;
 export type Product = typeof products.$inferSelect;
+export type NewProduct = typeof products.$inferInsert;
 
 export type InsertReview = z.infer<typeof insertReviewSchema>;
 export type Review = typeof reviews.$inferSelect;
