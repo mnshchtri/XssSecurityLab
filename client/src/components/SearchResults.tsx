@@ -5,6 +5,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useSecurity } from "@/hooks/use-security";
 import { AlertTriangle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useEffect } from "react";
+
+import { useRef } from "react"; // already imported useEffect above
 
 interface SearchResultsProps {
   query: string;
@@ -13,6 +16,22 @@ interface SearchResultsProps {
 interface SearchResponse {
   products: Product[];
   query: string;
+}
+
+function DangerousQueryRenderer({ html }: { html: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.innerHTML = html;
+    }
+  }, [html]);
+  return (
+    <span
+      ref={ref}
+      data-vulnerability="reflected-xss"
+      className="inline-block px-2 py-1 rounded bg-red-100 text-red-800 font-mono border border-red-300 shadow-sm animate-pulse"
+    />
+  );
 }
 
 export default function SearchResults({ query }: SearchResultsProps) {
@@ -30,7 +49,7 @@ export default function SearchResults({ query }: SearchResultsProps) {
 
   return (
     <section className="container mx-auto px-4 py-4">
-      <Alert variant="warning" className="mb-6">
+      <Alert variant="destructive" className="mb-6">
         <AlertTriangle className="h-4 w-4" />
         <AlertTitle>Reflected XSS Vulnerability</AlertTitle>
         <AlertDescription>
@@ -42,15 +61,12 @@ export default function SearchResults({ query }: SearchResultsProps) {
       {/* Show search term - vulnerable to XSS */}
       <h2 className="text-xl font-semibold mb-4">
         Search Results for: {" "}
-        {mode === "secure" ? (
-          <span>{sanitizeInput(query)}</span>
-        ) : (
-          <span 
-            data-vulnerability="reflected-xss"
-            dangerouslySetInnerHTML={{ __html: query }}
-          />
-        )}
-      </h2>
+         {mode === "secure" ? (
+           <span className="inline-block px-2 py-1 rounded bg-green-100 text-green-800 font-mono border border-green-300 shadow-sm">{sanitizeInput(query)}</span>
+         ) : (
+           <DangerousQueryRenderer html={query} />
+         )}
+       </h2>
       
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

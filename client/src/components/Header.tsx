@@ -45,16 +45,29 @@ export default function Header() {
           </div>
 
           {/* Security Controls */}
-          <div className="hidden md:flex items-center space-x-4 bg-gray-100 p-2 rounded">
-            <span className="text-sm font-medium">Security Mode:</span>
-            <div className="inline-flex items-center space-x-2 vulnerability-indicator">
-              <span className="text-sm text-red-600">Vulnerable</span>
-              <Switch
-                id="securityToggle" 
-                checked={mode === "secure"}
-                onCheckedChange={toggleMode}
-              />
-              <span className="text-sm text-green-600">Secure</span>
+          <div className="hidden md:flex items-center space-x-2 bg-gradient-to-r from-red-100 to-green-100 p-1 rounded-lg shadow-inner">
+            <span className="text-xs font-semibold text-gray-600 mr-1">Security:</span>
+            <div className="flex items-center gap-0.5 rounded bg-white shadow px-0.5 py-0.5">
+              <button
+                className={`flex items-center gap-0.5 px-2 py-0.5 rounded transition-all duration-200 text-xs font-semibold focus:outline-none ${mode === 'vulnerable' ? 'bg-red-500 text-white shadow scale-105' : 'bg-transparent text-red-500 hover:bg-red-100'}`}
+                style={{minWidth: 0}}
+                onClick={() => mode !== 'vulnerable' && toggleMode()}
+                aria-pressed={mode === 'vulnerable'}
+                title="Vulnerable Mode"
+              >
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-400 mr-0.5" />
+                Vuln
+              </button>
+              <button
+                className={`flex items-center gap-0.5 px-2 py-0.5 rounded transition-all duration-200 text-xs font-semibold focus:outline-none ${mode === 'secure' ? 'bg-green-500 text-white shadow scale-105' : 'bg-transparent text-green-600 hover:bg-green-100'}`}
+                style={{minWidth: 0}}
+                onClick={() => mode !== 'secure' && toggleMode()}
+                aria-pressed={mode === 'secure'}
+                title="Secure Mode"
+              >
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 mr-0.5" />
+                Secure
+              </button>
             </div>
           </div>
 
