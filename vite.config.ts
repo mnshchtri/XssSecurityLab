@@ -30,7 +30,7 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
     rollupOptions: {
-      external: ['react-helmet']
+      external: ['react-helmet', 'react-helmet-async']
     }
   },
 });
