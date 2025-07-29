@@ -91,7 +91,6 @@ export const cartItems = pgTable("cart_items", {
   updatedAt: timestamp("updated_at").defaultNow(),
 }, (table) => ({
   userProductIdx: index("user_product_idx").on(table.userId, table.productId),
-  uniqueUserProduct: primaryKey({ columns: [table.userId, table.productId] }),
 }));
 
 export const insertCartItemSchema = createInsertSchema(cartItems).pick({
