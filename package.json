@@ -68,6 +68,7 @@
   },
   "devDependencies": {
     "@replit/vite-plugin-shadcn-theme-json": "latest",
+    "@replit/vite-plugin-runtime-error-modal": "latest",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20.12.12",
     "@types/react": "^18.2.66",
