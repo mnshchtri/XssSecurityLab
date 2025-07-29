@@ -62,7 +62,8 @@
     "zod": "^3.23.8",
     "react-helmet": "^6.1.0",
     "react-helmet-async": "^2.0.0",
-    "wouter": "^3.2.0"
+    "wouter": "^3.2.0",
+    "lucide-react": "^0.395.0"
   },
   "devDependencies": {
     "@replit/vite-plugin-runtime-error-modal": "latest",
